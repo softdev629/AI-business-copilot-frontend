@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+// import libraries
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import "./App.css";
+import "antd/dist/reset.css";
+
+import PDFChatQA from "./components/chatqa";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Routes>
+          <Route path="/" element={<PDFChatQA />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
