@@ -5,6 +5,7 @@ import axios from "axios";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
 import "./index.css";
+import { useParams } from "react-router-dom";
 
 const ChatBox = () => {
   // Hooks
@@ -20,16 +21,19 @@ const ChatBox = () => {
   ]); // Chat History
   const [prompt, setPrompt] = useState(""); // Question
   const [isAnswered, setIsAnswered] = useState(true); // Answer state
+  const params = useParams(); // Url Params
   const { sendMessage, lastMessage, readyState } = useWebSocket(
-    "ws://localhost:9000/api/chat"
+    `ws://localhost:9000/api/chat/${params.id}`
   );
 
   // Receive Messages
   useEffect(() => {
     if (lastMessage !== null) {
+      // Add History
       setHistory((prev) =>
         prev.concat({ type: "bot", text: lastMessage.data })
       );
+      // Think Stop Flag
       setIsAnswered(true);
     }
   }, [lastMessage]);
@@ -44,6 +48,7 @@ const ChatBox = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Before answer, make user not to ask questions
     if (!isAnswered) {
       message.warning("AI Bot is thinking! Please wait!");
       return;

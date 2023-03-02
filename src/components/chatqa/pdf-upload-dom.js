@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Space, message, Upload } from "antd";
 import { InboxOutlined } from "@ant-design/icons";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
+import { useParams } from "react-router-dom";
 
 import "@react-pdf-viewer/core/lib/styles/index.css";
 
@@ -9,10 +10,11 @@ const { Dragger } = Upload;
 
 const PDFUpload = () => {
   const [url, setUrl] = useState(null);
+  const params = useParams();
 
   const draggerProps = {
     maxCount: 1,
-    action: `/api/upload`,
+    action: `/api/upload/${params.id}`,
     onChange(info) {
       const { status } = info.file;
       if (status === "done")

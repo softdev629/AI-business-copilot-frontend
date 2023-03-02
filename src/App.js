@@ -12,8 +12,8 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/upload" element={<PDFUpload />} />
-          <Route path="/chat" element={<ChatBox />} />
+          <Route path="/upload/:id" element={<PDFUpload />} />
+          <Route path="/chat/:id" element={<ChatBox />} />
         </Routes>
       </Router>
     </div>
