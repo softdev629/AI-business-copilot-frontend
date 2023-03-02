@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input, Button, List, Avatar, message } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import axios from "axios";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 
 import "./index.css";
 
 const ChatBox = () => {
+  // Hooks
   const [history, setHistory] = useState([
     {
       type: "human",
@@ -15,9 +17,30 @@ const ChatBox = () => {
       type: "bot",
       text: "Ask me any questions related to this PDF context.",
     },
-  ]);
-  const [prompt, setPrompt] = useState("");
-  const [isAnswered, setIsAnswered] = useState(true);
+  ]); // Chat History
+  const [prompt, setPrompt] = useState(""); // Question
+  const [isAnswered, setIsAnswered] = useState(true); // Answer state
+  const { sendMessage, lastMessage, readyState } = useWebSocket(
+    "ws://localhost:9000/api/chat"
+  );
+
+  // Receive Messages
+  useEffect(() => {
+    if (lastMessage !== null) {
+      setHistory((prev) =>
+        prev.concat({ type: "bot", text: lastMessage.data })
+      );
+      setIsAnswered(true);
+    }
+  }, [lastMessage]);
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: "Connecting",
+    [ReadyState.OPEN]: "Open",
+    [ReadyState.CLOSING]: "Closing",
+    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.UNINSTANTIATED]: "Uninstantiated",
+  }[readyState];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,19 +51,9 @@ const ChatBox = () => {
     setIsAnswered(false);
     history.push({ type: "human", text: prompt });
     setHistory([...history]);
+
+    sendMessage(prompt);
     setPrompt("");
-
-    let formData = new FormData();
-    formData.append("prompt", prompt);
-
-    const response = await axios.post(
-      "http://localhost:5000/api/chat",
-      formData
-    );
-
-    history.push({ type: "bot", text: response.data.answer });
-    setHistory([...history]);
-    setIsAnswered(true);
   };
 
   return (
@@ -75,6 +88,7 @@ const ChatBox = () => {
             onChange={(e) => setPrompt(e.target.value)}
             size="large"
             value={prompt}
+            disabled={readyState !== ReadyState.OPEN}
           />
           <Button
             htmlType="submit"
@@ -82,6 +96,7 @@ const ChatBox = () => {
             shape="circle"
             icon={<SendOutlined />}
             size="large"
+            disabled={readyState !== ReadyState.OPEN}
           />
         </Input.Group>
       </form>

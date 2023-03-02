@@ -16,6 +16,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0",
     "react-scripts": "5.0.1",
+    "react-use-websocket": "^4.3.1",
     "redux-thunk": "^2.4.2",
     "web-vitals": "^2.1.4"
   },
@@ -46,5 +47,5 @@
   "devDependencies": {
     "redux-devtools-extension": "^2.13.9"
   },
-  "proxy": "http://localhost:5000"
+  "proxy": "http://localhost:9000"
 }
