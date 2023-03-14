@@ -21,9 +21,9 @@ const ChatBox = () => {
   ]); // Chat History
   const [prompt, setPrompt] = useState(""); // Question
   const [isAnswered, setIsAnswered] = useState(true); // Answer state
-  const params = useParams(); // Url Params
+  const params = useParams(); // Url ParamsZ
   const { sendMessage, lastMessage, readyState } = useWebSocket(
-    `ws://localhost:9000/api/chat/${params.id}`
+    `wss://monkfish-app-2cxx3.ondigitalocean.app/api/chat/${params.id}`
   );
 
   // Receive Messages

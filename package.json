@@ -47,5 +47,5 @@
   "devDependencies": {
     "redux-devtools-extension": "^2.13.9"
   },
-  "proxy": "http://localhost:9000"
+  "proxy": "https://monkfish-app-2cxx3.ondigitalocean.app"
 }
