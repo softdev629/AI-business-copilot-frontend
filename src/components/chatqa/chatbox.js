@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Input, Button, List, Avatar, message } from "antd";
 import { SendOutlined } from "@ant-design/icons";
-import axios from "axios";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 
 import "./index.css";
 import { useParams } from "react-router-dom";
 
-const ChatBox = () => {
+const ChatBox = (props) => {
   // Hooks
   const [history, setHistory] = useState([
     {
@@ -23,7 +22,7 @@ const ChatBox = () => {
   const [isAnswered, setIsAnswered] = useState(true); // Answer state
   const params = useParams(); // Url ParamsZ
   const { sendMessage, lastMessage, readyState } = useWebSocket(
-    `wss://monkfish-app-2cxx3.ondigitalocean.app/api/chat/${params.id}`
+    `ws://localhost:9000/api/${props.type}/chat/${params.id}`
   );
 
   // Receive Messages
