@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Input, Button, List, Avatar, message } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import useWebSocket, { ReadyState } from "react-use-websocket";
@@ -15,12 +15,13 @@ const ChatBox = (props) => {
     },
     {
       type: "bot",
-      text: "Ask me any questions related to this PDF context.",
+      text: `Ask me any thing.`,
     },
   ]); // Chat History
   const [prompt, setPrompt] = useState(""); // Question
   const [isAnswered, setIsAnswered] = useState(true); // Answer state
   const params = useParams(); // Url ParamsZ
+  const chatHistoryRef = useRef(null);
   const { sendMessage, lastMessage, readyState } = useWebSocket(
     `ws://localhost:9000/api/${props.type}/chat/${params.id}`
   );
@@ -32,6 +33,9 @@ const ChatBox = (props) => {
       setHistory((prev) =>
         prev.concat({ type: "bot", text: lastMessage.data })
       );
+      setTimeout(() => {
+        chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
+      }, 50);
       // Think Stop Flag
       setIsAnswered(true);
     }
@@ -55,40 +59,50 @@ const ChatBox = (props) => {
     setIsAnswered(false);
     history.push({ type: "human", text: prompt });
     setHistory([...history]);
+    setTimeout(() => {
+      chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
+    }, 100);
 
     sendMessage(prompt);
     setPrompt("");
   };
 
+  const ChatItem = (type, message, index) => {
+    return (
+      <div
+        key={index}
+        style={
+          type == "bot"
+            ? { display: "flex", flexDirection: "row" }
+            : { display: "flex", flexDirection: "row-reverse" }
+        }
+      >
+        <img
+          src={
+            type == "bot" ? "/assets/images/bot.png" : "/assets/images/user.png"
+          }
+          width={35}
+          height={35}
+        />
+        <div
+          style={{ maxWidth: 400 }}
+          className={type == "bot" ? "bot_item_content" : "user_item_content"}
+        >
+          {message}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="chat_container">
-      <List
-        className="chat_history"
-        itemLayout="horizontal"
-        dataSource={history}
-        renderItem={(item) => (
-          <List.Item>
-            <List.Item.Meta
-              className="chat"
-              avatar={
-                <Avatar
-                  src={
-                    item.type === "human"
-                      ? "/assets/images/user.png"
-                      : "/assets/images/bot.png"
-                  }
-                />
-              }
-              title={item.type === "human" ? "Question" : "Answer"}
-              description={item.text}
-            />
-          </List.Item>
-        )}
-      ></List>
+      <div className="chat_history" ref={chatHistoryRef}>
+        {history.map((item, index) => ChatItem(item.type, item.text, index))}
+      </div>
       <form className="message_box" onSubmit={handleSubmit}>
         <Input.Group compact>
           <Input
-            style={{ width: "calc(100% - 50px)", textAlign: "left" }}
+            style={{ width: "calc(100% - 100px)", textAlign: "left" }}
             onChange={(e) => setPrompt(e.target.value)}
             size="large"
             value={prompt}
@@ -100,6 +114,7 @@ const ChatBox = (props) => {
             shape="circle"
             icon={<SendOutlined />}
             size="large"
+            style={{ marginLeft: 10 }}
             disabled={readyState !== ReadyState.OPEN}
           />
         </Input.Group>
