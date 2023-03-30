@@ -113,7 +113,7 @@ const ChatBox = () => {
   return (
     <div
       className="chat_container"
-      style={{ backgroundColor: "rgb(16, 16, 16)" }}
+      style={{ backgroundColor: colorSet[params.id % colorSet.length] }}
     >
       <h1 style={{ color: "white" }}>Music Business Bot {params.id}</h1>
       <div className="chat_history" ref={chatHistoryRef}>

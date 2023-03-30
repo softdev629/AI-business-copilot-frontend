@@ -28,29 +28,29 @@
 .message_box {
   width: 100%;
   padding-bottom: 15px;
-  border-top: 1px solid rgb(40, 40, 40);
+  /* border-top: 1px solid rgb(40, 40, 40); */
   padding-top: 15px;
 }
 
 .bot_item_content {
   margin-left: 5px;
   padding: 20px 35px;
-  /* background-color: rgb(219, 226, 235); */
-  background-color: rgb(27, 27, 27);
+  background-color: rgb(219, 226, 235);
+  /* background-color: rgb(27, 27, 27); */
   border-radius: 20px;
-  color: white;
+  /* color: white; */
 }
 
 .user_item_content {
   color: white;
   margin-right: 10px;
   padding: 20px 35px;
-  /* background-color: rgb(0, 141, 254); */
-  background-color: rgb(40, 40, 40);
+  background-color: rgb(0, 141, 254);
+  /* background-color: rgb(40, 40, 40); */
   border-radius: 20px;
 }
 
-.ant-input {
+/* .ant-input {
   color: white;
   background-color: rgb(40, 40, 40) !important;
 }
@@ -61,4 +61,9 @@
 
 .anticon {
   color: white !important;
-}
+} */
+
+/* .ant-input {
+  color: black !important;
+  background-color: white !important;
+} */

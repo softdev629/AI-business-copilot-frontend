@@ -16,7 +16,7 @@ const FileUpload = () => {
 
   const draggerProps = {
     maxCount: 1,
-    action: `http://localhost:9000/api/pdf/upload/${params.id}`,
+    action: `http://localhost:9000/api/upload/${params.id}`,
     onChange(info) {
       const { status } = info.file;
 
