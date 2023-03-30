@@ -6,7 +6,23 @@ import useWebSocket, { ReadyState } from "react-use-websocket";
 import "./index.css";
 import { useParams } from "react-router-dom";
 
-const ChatBox = (props) => {
+const colorSet = [
+  "#FDAC53",
+  "#9BB7D4",
+  "#B55A30",
+  "#F5DF4D",
+  "#0072B5",
+  "#A0DAA9",
+  "#E9897E",
+  "#00A170",
+  "#926AA6",
+  "#D2386C",
+  "#363945",
+  "#939597",
+  "#EFE1CE",
+];
+
+const ChatBox = () => {
   // Hooks
   const [history, setHistory] = useState([
     {
@@ -20,11 +36,11 @@ const ChatBox = (props) => {
   ]); // Chat History
   const [prompt, setPrompt] = useState(""); // Question
   const [isAnswered, setIsAnswered] = useState(true); // Answer state
-  const params = useParams(); // Url ParamsZ
+  const params = useParams(); // Url Params
   const chatHistoryRef = useRef(null);
   const { sendMessage, lastMessage, readyState } = useWebSocket(
-    `ws://localhost:9000/api/${props.type}/chat/${params.id}`
-  );
+    `ws://localhost:9000/api/chat/${params.id}`
+  ); // Websocket Hook
 
   // Receive Messages
   useEffect(() => {
@@ -56,13 +72,13 @@ const ChatBox = (props) => {
       message.warning("AI Bot is thinking! Please wait!");
       return;
     }
+
     setIsAnswered(false);
     history.push({ type: "human", text: prompt });
     setHistory([...history]);
     setTimeout(() => {
       chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
     }, 100);
-
     sendMessage(prompt);
     setPrompt("");
   };
@@ -95,7 +111,11 @@ const ChatBox = (props) => {
   };
 
   return (
-    <div className="chat_container">
+    <div
+      className="chat_container"
+      style={{ backgroundColor: "rgb(16, 16, 16)" }}
+    >
+      <h1 style={{ color: "white" }}>Music Business Bot {params.id}</h1>
       <div className="chat_history" ref={chatHistoryRef}>
         {history.map((item, index) => ChatItem(item.type, item.text, index))}
       </div>

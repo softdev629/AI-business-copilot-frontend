@@ -7,14 +7,16 @@ const { Search } = Input;
 
 const YoutubeLinkDom = () => {
   const [loading, setLoading] = useState(false);
+  const [videoURL, setVideoURL] = useState("");
   const params = useParams();
 
   const onSearch = (value) => {
     setLoading(true);
 
+    setVideoURL(`https://${value}`);
     axios
       .post(`http://localhost:9000/api/youtube/train/${params.id}`, {
-        url: `http://${value}`,
+        url: `https://${value}`,
       })
       .then((res) => setLoading(false))
       .catch((err) => {
@@ -24,17 +26,21 @@ const YoutubeLinkDom = () => {
   };
 
   return (
-    <Space direction="vertical">
-      <Search
-        placeholder="input youtube video link"
-        loading={loading}
-        enterButton="Train"
-        size="large"
-        addonBefore="https://"
-        onSearch={onSearch}
-        style={{ width: 500, marginTop: 20 }}
-      />
-    </Space>
+    <>
+      <h2 className="youtube-link__header">Youtube Link</h2>
+      <Space direction="vertical" className="youtube-link__container">
+        <Search
+          placeholder="input youtube video link"
+          loading={loading}
+          enterButton="Train"
+          size="large"
+          addonBefore="https://"
+          onSearch={onSearch}
+          className="youtube-link__input"
+        />
+        <iframe src={videoURL} width="100%" height={300}></iframe>
+      </Space>
+    </>
   );
 };
 

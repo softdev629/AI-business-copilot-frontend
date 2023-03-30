@@ -1,0 +1,91 @@
+.file-upload__container {
+  background-color: rgb(27, 27, 27);
+  width: 300px;
+  height: 85%;
+  margin: 20px;
+}
+
+.file-upload__component {
+  width: 250px;
+  margin-top: 20px;
+}
+
+.pdf-view__container {
+  margin-top: 40px;
+  height: 300px;
+  width: 250px;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgb(76, 76, 76);
+}
+
+.pdf-view__container::-webkit-scrollbar {
+  display: none;
+}
+
+.text-view__container {
+  height: 300px;
+  width: 250px;
+  margin-top: 40px;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgb(76, 76, 76);
+}
+
+.text-view__container p {
+  text-align: left;
+  word-wrap: break-word;
+  overflow-y: auto;
+  height: 100%;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 10px;
+  background-color: white;
+  padding: 20px;
+}
+
+.text-view__container p::-webkit-scrollbar {
+  display: none;
+}
+
+.file-upload__header {
+  color: white;
+  margin-top: 20px;
+}
+
+.youtube-link__header {
+  color: white;
+  margin-top: 20px;
+}
+
+.youtube-link__container {
+  background-color: rgb(27, 27, 27);
+  padding: 20px;
+  height: 85%;
+  margin: 20px; 
+}
+
+.youtube-link__input {
+  width: "100%";
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.ant-input-wrapper {
+  background-color: rgb(255, 255, 255, 0.05);
+  border-radius: 6px;
+}
+
+.ant-input-group-addon {
+  border: 1px solid rgb(52, 52, 52) !important;
+  color: white !important;
+}
+
+.ant-input {
+  border: none;
+  background-color: rgb(40, 40, 40);
+  color: white;
+}
+
+.ant-input::placeholder {
+  color: rgb(52, 52, 52);
+}
