@@ -89,3 +89,11 @@
 .ant-input::placeholder {
   color: rgb(52, 52, 52);
 } */
+
+.settings-container {
+  background-color: rgb(27, 27, 27);
+  height: 600px;
+  width: 300px;
+  margin: 20px;
+  padding: 20px;
+}

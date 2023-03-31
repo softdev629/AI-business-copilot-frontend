@@ -1,4 +1,4 @@
-import { Input, Space } from "antd";
+import { Input, message, Space } from "antd";
 import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -18,10 +18,13 @@ const YoutubeLinkDom = () => {
       .post(`http://localhost:9000/api/youtube/train/${params.id}`, {
         url: `https://${value}`,
       })
-      .then((res) => setLoading(false))
-      .catch((err) => {
-        console.log(err.message);
+      .then(() => {
+        message.success(`https://${value} Training Success`);
         setLoading(false);
+      })
+      .catch(() => {
+        message.error(`https://${value} Training Failed`);
+        message.setLoading(false);
       });
   };
 

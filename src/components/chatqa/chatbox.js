@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Input, Button, List, Avatar, message } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import useWebSocket, { ReadyState } from "react-use-websocket";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import "./index.css";
-import { useParams } from "react-router-dom";
 
 const colorSet = [
   "#FDAC53",
@@ -36,6 +37,7 @@ const ChatBox = () => {
   ]); // Chat History
   const [prompt, setPrompt] = useState(""); // Question
   const [isAnswered, setIsAnswered] = useState(true); // Answer state
+  const [settings, setSettings] = useState(null);
   const params = useParams(); // Url Params
   const chatHistoryRef = useRef(null);
   const { sendMessage, lastMessage, readyState } = useWebSocket(
@@ -56,6 +58,12 @@ const ChatBox = () => {
       setIsAnswered(true);
     }
   }, [lastMessage]);
+
+  useEffect(() => {
+    axios.get(`http://localhost:9000/api/settings/${params.id}`).then((res) => {
+      setSettings(res.data);
+    });
+  }, []);
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: "Connecting",
@@ -95,14 +103,24 @@ const ChatBox = () => {
       >
         <img
           src={
-            type == "bot" ? "/assets/images/bot.png" : "/assets/images/user.png"
+            !settings
+              ? type === "bot"
+                ? "/assets/images/bot.png"
+                : "/assets/images/user.png"
+              : type === "bot"
+              ? settings.bot === ""
+                ? "/assets/images/bot.png"
+                : `http://localhost:9000/settings/${params.id}/${settings.bot}`
+              : settings.user === ""
+              ? "/assets/images/user.png"
+              : `http://localhost:9000/settings/${params.id}/${settings.user}`
           }
           width={35}
           height={35}
         />
         <div
           style={{ maxWidth: 400 }}
-          className={type == "bot" ? "bot_item_content" : "user_item_content"}
+          className={type === "bot" ? "bot_item_content" : "user_item_content"}
         >
           {message}
         </div>
@@ -115,7 +133,18 @@ const ChatBox = () => {
       className="chat_container"
       style={{ backgroundColor: colorSet[params.id % colorSet.length] }}
     >
-      <h1 style={{ color: "white" }}>Music Business Bot {params.id}</h1>
+      <h1
+        style={{
+          color: "white",
+        }}
+      >
+        {!settings ? `Music Business Bot ${params.id}` : settings.title}
+      </h1>
+      {settings && settings.header !== "" && (
+        <img
+          src={`http://localhost:9000/settings/${params.id}/${settings.header}`}
+        />
+      )}
       <div className="chat_history" ref={chatHistoryRef}>
         {history.map((item, index) => ChatItem(item.type, item.text, index))}
       </div>
