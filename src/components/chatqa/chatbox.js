@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Input, Button, List, Avatar, message } from "antd";
+import { Input, Button, message } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import axios from "axios";
@@ -51,6 +51,10 @@ const ChatBox = () => {
       setHistory((prev) =>
         prev.concat({ type: "bot", text: lastMessage.data })
       );
+
+      const utterance = new SpeechSynthesisUtterance(lastMessage.data);
+      window.speechSynthesis.speak(utterance);
+
       setTimeout(() => {
         chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
       }, 50);
