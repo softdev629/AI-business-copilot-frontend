@@ -1,6 +1,6 @@
 import React from "react";
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Form, Input, message, Space, Upload } from "antd";
+import { Button, Form, Input, message, Select, Space, Upload } from "antd";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -8,9 +8,11 @@ const UploadSettings = () => {
   const params = useParams();
 
   const onFinish = (values) => {
+    console.log(values);
     axios
       .post(`http://localhost:9000/api/header-change/${params.id}`, {
         title: values.title,
+        model: values.model,
       })
       .then(() => {
         message.success("Title changed successfully.");
@@ -36,6 +38,23 @@ const UploadSettings = () => {
           onFinish={onFinish}
           align="left"
         >
+          <Form.Item
+            label={
+              <label style={{ color: "white" }} name="model">
+                Model
+              </label>
+            }
+            initialValue="gpt-3.5-turbo"
+            name="model"
+          >
+            <Select
+              options={[
+                { value: "text-davinci-003", label: "GPT-3" },
+                { value: "gpt-3.5-turbo", label: "GPT-3.5" },
+                { value: "gpt-4", label: "GPT-4" },
+              ]}
+            />
+          </Form.Item>
           <Form.Item
             label={<label style={{ color: "white" }}>Title</label>}
             name="title"
