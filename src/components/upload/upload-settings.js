@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message, Select, Space, Upload } from "antd";
 import { useParams } from "react-router-dom";
@@ -6,9 +6,19 @@ import axios from "axios";
 
 const UploadSettings = () => {
   const params = useParams();
+  const [data, setData] = useState({ title: "", model: "" });
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        `http://localhost:9000/api/settings/${params.id}`
+      );
+      setData(res.data);
+    }
+    fetchData();
+  }, []);
 
   const onFinish = (values) => {
-    console.log(values);
     axios
       .post(`http://localhost:9000/api/header-change/${params.id}`, {
         title: values.title,
@@ -22,9 +32,18 @@ const UploadSettings = () => {
       });
   };
 
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    form.setFieldsValue({
+      title: data.title,
+      model: data.model,
+    });
+  }, [data]);
+
   return (
     <>
-      <h2 style={{ color: "white", marginTop: 20 }}>Settings</h2>
+      <h2 style={{ marginTop: 20 }}>Settings</h2>
       <Space
         className="settings-container"
         align="center"
@@ -37,28 +56,17 @@ const UploadSettings = () => {
           wrapperCol={{ span: 18 }}
           onFinish={onFinish}
           align="left"
+          form={form}
         >
-          <Form.Item
-            label={
-              <label style={{ color: "white" }} name="model">
-                Model
-              </label>
-            }
-            initialValue="gpt-3.5-turbo"
-            name="model"
-          >
+          <Form.Item label="Model" name="model">
             <Select
               options={[
                 { value: "text-davinci-003", label: "GPT-3" },
                 { value: "gpt-3.5-turbo", label: "GPT-3.5" },
-                { value: "gpt-4", label: "GPT-4" },
               ]}
             />
           </Form.Item>
-          <Form.Item
-            label={<label style={{ color: "white" }}>Title</label>}
-            name="title"
-          >
+          <Form.Item label="Title" name="title">
             <Input placeholder="Input chat room title" />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 6, span: 18 }}>

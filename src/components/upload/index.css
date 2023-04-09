@@ -1,8 +1,9 @@
 .file-upload__container {
-  background-color: rgb(27, 27, 27);
   width: 300px;
   height: 600px;
   margin: 20px;
+  border: 1px solid;
+  border-radius: 10px;
 }
 
 .file-upload__component {
@@ -11,7 +12,6 @@
 }
 
 .pdf-view__container {
-  margin-top: 40px;
   height: 300px;
   width: 250px;
   padding: 20px;
@@ -48,20 +48,19 @@
 }
 
 .file-upload__header {
-  color: white;
   margin-top: 20px;
 }
 
 .youtube-link__header {
-  color: white;
   margin-top: 20px;
 }
 
 .youtube-link__container {
-  background-color: rgb(27, 27, 27);
   padding: 20px;
   height: 600px;
   margin: 20px; 
+  border: 1px solid;
+  border-radius: 10px;
 }
 
 .youtube-link__input {
@@ -70,30 +69,11 @@
   margin-bottom: 30px;
 }
 
-.ant-input-wrapper {
-  background-color: rgb(255, 255, 255, 0.05);
-  border-radius: 6px;
-}
-
-.ant-input-group-addon {
-  border: 1px solid rgb(52, 52, 52) !important;
-  color: white !important;
-}
-/* 
-.ant-input {
-  border: none;
-  background-color: rgb(40, 40, 40);
-  color: white;
-}
-
-.ant-input::placeholder {
-  color: rgb(52, 52, 52);
-} */
-
 .settings-container {
-  background-color: rgb(27, 27, 27);
   height: 600px;
   width: 300px;
   margin: 20px;
   padding: 20px;
+  border: 1px solid;
+  border-radius: 10px;
 }

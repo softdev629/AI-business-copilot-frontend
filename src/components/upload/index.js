@@ -11,7 +11,6 @@ const TrainPage = () => {
     <>
       <Row
         style={{
-          backgroundColor: "rgb(16, 16, 16)",
           height: "max('fit-content', 100vh)",
         }}
       >

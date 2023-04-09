@@ -47,18 +47,20 @@ const FileUpload = () => {
         align="center"
         className="file-upload__container"
       >
-        <Dragger {...draggerProps} style={{ width: 250, marginTop: 20 }}>
-          <p className="ant-upload-drag-icon">
-            <FilePdfOutlined style={{ color: "white" }} />
-          </p>
-          <p className="ant-upload-text" style={{ color: "white" }}>
-            Drag & Drop Files Or{" "}
-            <span style={{ color: "rgb(182, 156, 93)" }}>Browse</span>
-          </p>
-          <p className="ant-upload-hint" style={{ color: "rgb(92, 92, 92)" }}>
-            Supported formats: PDF, .txt
-          </p>
-        </Dragger>
+        <div style={{ width: 250 }}>
+          <Dragger {...draggerProps} style={{ width: 250, marginTop: 20 }}>
+            <p className="ant-upload-drag-icon">
+              <FilePdfOutlined />
+            </p>
+            <p className="ant-upload-text">
+              Drag & Drop Files Or{" "}
+              <span style={{ color: "rgb(182, 156, 93)" }}>Browse</span>
+            </p>
+            <p className="ant-upload-hint" style={{ color: "rgb(92, 92, 92)" }}>
+              Supported formats: PDF, .txt
+            </p>
+          </Dragger>
+        </div>
         {type === "application/pdf" && (
           <Worker workerUrl="/assets/js/pdf.worker.js">
             <div className="pdf-view__container">
