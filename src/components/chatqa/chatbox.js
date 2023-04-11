@@ -5,7 +5,7 @@ import useWebSocket, { ReadyState } from "react-use-websocket";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import "./index.css";
+import { SERVER_URL } from "../../constant";
 
 const colorSet = [
   "#FDAC53",
@@ -41,7 +41,7 @@ const ChatBox = () => {
   const params = useParams(); // Url Params
   const chatHistoryRef = useRef(null);
   const { sendMessage, lastMessage, readyState } = useWebSocket(
-    `ws://localhost:9000/api/chat/${params.id}`
+    `ws://${SERVER_URL}/api/chat/${params.id}`
   ); // Websocket Hook
 
   // Receive Messages
@@ -64,7 +64,7 @@ const ChatBox = () => {
   }, [lastMessage]);
 
   useEffect(() => {
-    axios.get(`http://localhost:9000/api/settings/${params.id}`).then((res) => {
+    axios.get(`/api/settings/${params.id}`).then((res) => {
       setSettings(res.data);
     });
   }, []);
@@ -114,10 +114,10 @@ const ChatBox = () => {
               : type === "bot"
               ? settings.bot === ""
                 ? "/assets/images/bot.png"
-                : `http://localhost:9000/settings/${params.id}/${settings.bot}`
+                : `http://${SERVER_URL}/settings/${params.id}/${settings.bot}`
               : settings.user === ""
               ? "/assets/images/user.png"
-              : `http://localhost:9000/settings/${params.id}/${settings.user}`
+              : `http://${SERVER_URL}/settings/${params.id}/${settings.user}`
           }
           width={35}
           height={35}
@@ -146,7 +146,7 @@ const ChatBox = () => {
       </h1>
       {settings && settings.header !== "" && (
         <img
-          src={`http://localhost:9000/settings/${params.id}/${settings.header}`}
+          src={`http://${SERVER_URL}/settings/${params.id}/${settings.header}`}
         />
       )}
       <div className="chat_history" ref={chatHistoryRef}>

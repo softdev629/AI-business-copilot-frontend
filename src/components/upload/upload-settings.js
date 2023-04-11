@@ -10,9 +10,7 @@ const UploadSettings = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(
-        `http://localhost:9000/api/settings/${params.id}`
-      );
+      const res = await axios.get(`/api/settings/${params.id}`);
       setData(res.data);
     }
     fetchData();
@@ -20,7 +18,7 @@ const UploadSettings = () => {
 
   const onFinish = (values) => {
     axios
-      .post(`http://localhost:9000/api/header-change/${params.id}`, {
+      .post(`/api/header-change/${params.id}`, {
         title: values.title,
         model: values.model,
       })
@@ -77,7 +75,7 @@ const UploadSettings = () => {
         </Form>
 
         <Upload
-          action={`http://localhost:9000/api/header-upload/${params.id}`}
+          action={`/api/header-upload/${params.id}`}
           listType="picture"
           maxCount={1}
         >
@@ -85,7 +83,7 @@ const UploadSettings = () => {
         </Upload>
 
         <Upload
-          action={`http://localhost:9000/api/botimg-upload/${params.id}`}
+          action={`/api/botimg-upload/${params.id}`}
           listType="picture"
           maxCount={1}
         >
@@ -93,7 +91,7 @@ const UploadSettings = () => {
         </Upload>
 
         <Upload
-          action={`http://localhost:9000/api/userimg-upload/${params.id}`}
+          action={`/api/userimg-upload/${params.id}`}
           listType="picture"
           maxCount={1}
         >

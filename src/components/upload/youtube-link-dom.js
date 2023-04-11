@@ -12,10 +12,10 @@ const YoutubeLinkDom = () => {
 
   const onSearch = (value) => {
     setLoading(true);
-
+    value.replace("https://", "");
     setVideoURL(`https://${value}`);
     axios
-      .post(`http://localhost:9000/api/youtube/train/${params.id}`, {
+      .post(`/api/youtube/train/${params.id}`, {
         url: `https://${value}`,
       })
       .then(() => {

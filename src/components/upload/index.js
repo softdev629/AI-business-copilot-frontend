@@ -1,9 +1,8 @@
 import { Row, Col } from "antd";
 import React from "react";
+
 import FileUpload from "./file-upload-dom";
 import YoutubeLinkDom from "./youtube-link-dom";
-
-import "./index.css";
 import UploadSettings from "./upload-settings";
 
 const TrainPage = () => {
