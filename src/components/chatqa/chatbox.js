@@ -5,7 +5,7 @@ import useWebSocket, { ReadyState } from "react-use-websocket";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import { SERVER_URL } from "../../constant";
+import { SOCKET_URL, URI } from "../../constant";
 
 const colorSet = [
   "#FDAC53",
@@ -41,7 +41,7 @@ const ChatBox = () => {
   const params = useParams(); // Url Params
   const chatHistoryRef = useRef(null);
   const { sendMessage, lastMessage, readyState } = useWebSocket(
-    `ws://${SERVER_URL}/api/chat/${params.id}`
+    `${SOCKET_URL}/api/chat/${params.id}`
   ); // Websocket Hook
 
   // Receive Messages
@@ -114,10 +114,10 @@ const ChatBox = () => {
               : type === "bot"
               ? settings.bot === ""
                 ? "/assets/images/bot.png"
-                : `http://${SERVER_URL}/settings/${params.id}/${settings.bot}`
+                : `${URI}/settings/${params.id}/${settings.bot}`
               : settings.user === ""
               ? "/assets/images/user.png"
-              : `http://${SERVER_URL}/settings/${params.id}/${settings.user}`
+              : `${URI}/settings/${params.id}/${settings.user}`
           }
           width={35}
           height={35}
@@ -145,9 +145,7 @@ const ChatBox = () => {
         {!settings ? `Music Business Bot ${params.id}` : settings.title}
       </h1>
       {settings && settings.header !== "" && (
-        <img
-          src={`http://${SERVER_URL}/settings/${params.id}/${settings.header}`}
-        />
+        <img src={`${URI}/settings/${params.id}/${settings.header}`} />
       )}
       <div className="chat_history" ref={chatHistoryRef}>
         {history.map((item, index) => ChatItem(item.type, item.text, index))}

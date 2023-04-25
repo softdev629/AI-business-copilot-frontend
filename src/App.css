@@ -130,3 +130,11 @@
   border: 1px solid;
   border-radius: 10px;
 }
+
+.form-button {
+  width: 100%;
+}
+
+.login-form-forgot {
+  float: right
+}
