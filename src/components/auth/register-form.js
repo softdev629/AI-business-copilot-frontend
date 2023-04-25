@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Row, Col, Card } from "antd";
+import { Form, Input, Button, Row, Col, Card, message } from "antd";
 import {
   UserOutlined,
   LockOutlined,
@@ -8,10 +8,20 @@ import {
   PhoneOutlined,
 } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+import { URI } from "../../constant";
 
 const RegisterForm = () => {
-  const handleRegister = () => {
+  const navigate = useNavigate();
+
+  const handleRegister = (value) => {
     // Handle registration logic here
+    axios.post(`${URI}/api/register`, value).then(() => {
+      message.success("Successfully Registered!");
+      navigate("/login");
+    });
   };
 
   return (
