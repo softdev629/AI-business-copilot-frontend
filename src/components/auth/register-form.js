@@ -18,16 +18,16 @@ const RegisterForm = () => {
 
   const handleRegister = (value) => {
     // Handle registration logic here
-    axios.post(`${URI}/api/register`, value).then(() => {
-      message.success("Successfully Registered!");
-      navigate("/login");
+    axios.post(`${URI}/api/auth/register`, value).then(({ data }) => {
+      message.success(data.message);
+      navigate("/verify");
     });
   };
 
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
       <Col xs={20} sm={16} md={12} lg={8}>
-        <Card>
+        <Card style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}>
           <Form
             name="normal_register"
             initialValues={{ remember: true }}

@@ -13,6 +13,7 @@ import ChatBox from "./components/chatqa/chatbox";
 import TrainPage from "./components/upload";
 import LoginForm from "./components/auth/login-form";
 import RegisterForm from "./components/auth/register-form";
+import EmailVerify from "./components/auth/email-verify";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegisterForm />} />
+          <Route path="/verify" element={<EmailVerify />}>
+            <Route path=":code" element={<EmailVerify />} />
+          </Route>
           <Route path="/chat/:id" element={<ChatBox type="combine" />} />
           <Route path="/upload/:id" element={<TrainPage />} />
         </Routes>

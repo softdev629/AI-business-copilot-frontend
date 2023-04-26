@@ -2,16 +2,25 @@ import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Checkbox, Row, Col, Card } from "antd";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+
+import { URI } from "../../constant";
 
 const LoginForm = () => {
   const handleLogin = (value) => {
-    // Handle login logic here
+    console.log(value);
+    const formData = new FormData();
+    formData.append("username", value.email);
+    formData.append("password", value.password);
+    axios
+      .post(`${URI}/api/auth/login`, formData)
+      .then(({ data }) => console.log(data));
   };
 
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
       <Col xs={20} sm={16} md={12} lg={8}>
-        <Card>
+        <Card style={{ boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}>
           <Form
             name="normal_login"
             className="login-form"
