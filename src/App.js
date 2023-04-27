@@ -1,9 +1,10 @@
 // import libraries
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
+  useNavigate,
+  useLocation,
 } from "react-router-dom";
 import React from "react";
 import "./App.css";
@@ -14,22 +15,24 @@ import TrainPage from "./components/upload";
 import LoginForm from "./components/auth/login-form";
 import RegisterForm from "./components/auth/register-form";
 import EmailVerify from "./components/auth/email-verify";
+import { history } from "./utils/history";
 
 function App() {
+  history.navigate = useNavigate();
+  history.location = useLocation();
+
   return (
     <div className="App">
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/register" element={<RegisterForm />} />
-          <Route path="/verify" element={<EmailVerify />}>
-            <Route path=":code" element={<EmailVerify />} />
-          </Route>
-          <Route path="/chat/:id" element={<ChatBox type="combine" />} />
-          <Route path="/upload/:id" element={<TrainPage />} />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/register" element={<RegisterForm />} />
+        <Route path="/verify" element={<EmailVerify />}>
+          <Route path=":code" element={<EmailVerify />} />
+        </Route>
+        <Route path="/chat/:id" element={<ChatBox type="combine" />} />
+        <Route path="/upload/:id" element={<TrainPage />} />
+      </Routes>
     </div>
   );
 }

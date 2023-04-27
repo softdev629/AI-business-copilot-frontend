@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
-import { URI } from "../../constant";
+import { URI } from "../../utils/constant";
 
 const EmailVerify = () => {
   const params = useParams();

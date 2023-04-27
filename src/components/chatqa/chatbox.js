@@ -5,7 +5,7 @@ import useWebSocket, { ReadyState } from "react-use-websocket";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import { SOCKET_URL, URI } from "../../constant";
+import { SOCKET_URL, URI } from "../../utils/constant";
 
 const colorSet = [
   "#FDAC53",

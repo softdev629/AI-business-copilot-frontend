@@ -2,19 +2,17 @@ import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Checkbox, Row, Col, Card } from "antd";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
-
-import { URI } from "../../constant";
+import { login } from "./auth-actions";
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const handleLogin = (value) => {
-    console.log(value);
     const formData = new FormData();
     formData.append("username", value.email);
     formData.append("password", value.password);
-    axios
-      .post(`${URI}/api/auth/login`, formData)
-      .then(({ data }) => console.log(data));
+    dispatch(login(formData));
   };
 
   return (

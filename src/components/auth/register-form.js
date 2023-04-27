@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-import { URI } from "../../constant";
+import { URI } from "../../utils/constant";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
