@@ -1,11 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "../../utils/api";
-import { history } from "../../utils/history";
 
 export const login = createAsyncThunk("/auth/login", async (payload) => {
   const { data } = await api.post(`/auth/login`, payload);
   localStorage.setItem("token", data.access_token);
-  history.navigate("/home");
+  return data;
 });
 
 export const fetchUserData = createAsyncThunk(

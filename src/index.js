@@ -7,6 +7,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store";
+import { fetchUserData } from "./components/auth/auth-actions";
+
+if (localStorage.getItem("token")) {
+  store.dispatch(fetchUserData());
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
