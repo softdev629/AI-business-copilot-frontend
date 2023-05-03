@@ -1,12 +1,13 @@
 import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Checkbox, Row, Col, Card } from "antd";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import { login } from "./auth-actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.userData);
 
   const handleLogin = (value) => {
     const formData = new FormData();
@@ -14,6 +15,8 @@ const LoginForm = () => {
     formData.append("password", value.password);
     dispatch(login(formData));
   };
+
+  if (user) return <Navigate to="/upload/1" />;
 
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>

@@ -38,6 +38,8 @@ const authSlice = createSlice({
     builder.addCase(fetchUserData.rejected, (state) => {
       state.loading = false;
       state.userData = null;
+      localStorage.removeItem("token");
+      history.navigate("/login");
     });
   },
 });

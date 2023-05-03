@@ -16,6 +16,7 @@ import LoginForm from "./components/auth/login-form";
 import RegisterForm from "./components/auth/register-form";
 import EmailVerify from "./components/auth/email-verify";
 import { history } from "./utils/history";
+import RequireUser from "./components/require-user";
 
 function App() {
   history.navigate = useNavigate();
@@ -30,8 +31,10 @@ function App() {
         <Route path="/verify" element={<EmailVerify />}>
           <Route path=":code" element={<EmailVerify />} />
         </Route>
-        <Route path="/chat/:id" element={<ChatBox type="combine" />} />
-        <Route path="/upload/:id" element={<TrainPage />} />
+        <Route element={<RequireUser />}>
+          <Route path="/chat/:id" element={<ChatBox type="combine" />} />
+          <Route path="/upload/:id" element={<TrainPage />} />
+        </Route>
       </Routes>
     </div>
   );
