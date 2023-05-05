@@ -7,6 +7,15 @@ export const login = createAsyncThunk("/auth/login", async (payload) => {
   return data;
 });
 
+export const loginGoogle = createAsyncThunk(
+  "/auth/loginGoogle",
+  async (payload) => {
+    const { data } = await api.post("/auth/login/google", payload);
+    localStorage.setItem("token", data.access_token);
+    return data;
+  }
+);
+
 export const fetchUserData = createAsyncThunk(
   "/auth/fetchUserData",
   async (_, { rejectWithValue }) => {

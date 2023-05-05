@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, fetchUserData } from "./auth-actions";
+import { login, loginGoogle, fetchUserData } from "./auth-actions";
 import { history } from "../../utils/history";
 
 const initialState = {
@@ -26,6 +26,17 @@ const authSlice = createSlice({
       history.navigate("/upload/1");
     });
     builder.addCase(login.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(loginGoogle.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(loginGoogle.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.userData = payload.user;
+      history.navigate("/upload/1");
+    });
+    builder.addCase(loginGoogle.rejected, (state) => {
       state.loading = false;
     });
     builder.addCase(fetchUserData.pending, (state) => {

@@ -2,12 +2,16 @@ import React from "react";
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
 import { Form, Input, Button, Checkbox, Row, Col, Card } from "antd";
 import { NavLink, Navigate } from "react-router-dom";
-import { login } from "./auth-actions";
 import { useDispatch, useSelector } from "react-redux";
+import { GoogleLogin } from "@react-oauth/google";
+
+import { login, loginGoogle } from "./auth-actions";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.userData);
+
+  if (user) return <Navigate to="/upload/1" />;
 
   const handleLogin = (value) => {
     const formData = new FormData();
@@ -16,7 +20,11 @@ const LoginForm = () => {
     dispatch(login(formData));
   };
 
-  if (user) return <Navigate to="/upload/1" />;
+  const handleGoogleSuccess = (res) => {
+    dispatch(loginGoogle({ token: res.credential }));
+  };
+
+  const handleGoogleFailure = (err) => console.error(err);
 
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
@@ -75,6 +83,11 @@ const LoginForm = () => {
               Or <NavLink to="/register">register now!</NavLink>
             </Form.Item>
           </Form>
+
+          <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={handleGoogleFailure}
+          />
         </Card>
       </Col>
     </Row>
