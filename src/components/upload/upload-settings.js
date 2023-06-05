@@ -3,6 +3,7 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, message, Select, Space, Upload } from "antd";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { URI } from "../../utils/constant";
 
 const UploadSettings = () => {
   const params = useParams();
@@ -10,7 +11,7 @@ const UploadSettings = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(`/api/settings/${params.id}`);
+      const res = await axios.get(`${URI}/api/settings/${params.id}`);
       setData(res.data);
     }
     fetchData();
@@ -61,6 +62,7 @@ const UploadSettings = () => {
               options={[
                 { value: "text-davinci-003", label: "GPT-3" },
                 { value: "gpt-3.5-turbo", label: "GPT-3.5" },
+                { value: "gpt-4", label: "GPT-4" },
               ]}
             />
           </Form.Item>

@@ -64,7 +64,7 @@ const ChatBox = () => {
   }, [lastMessage]);
 
   useEffect(() => {
-    axios.get(`/api/settings/${params.id}`).then((res) => {
+    axios.get(`${URI}/settings/${params.id}`).then((res) => {
       setSettings(res.data);
     });
   }, []);

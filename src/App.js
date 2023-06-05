@@ -17,6 +17,7 @@ import RegisterForm from "./components/auth/register-form";
 import EmailVerify from "./components/auth/email-verify";
 import { history } from "./utils/history";
 import RequireUser from "./components/require-user";
+import UsersList from "./components/admin/users-list";
 
 function App() {
   history.navigate = useNavigate();
@@ -34,6 +35,9 @@ function App() {
         <Route element={<RequireUser />}>
           <Route path="/chat/:id" element={<ChatBox type="combine" />} />
           <Route path="/upload/:id" element={<TrainPage />} />
+          <Route path="/admin">
+            <Route path="users" element={<UsersList />}></Route>
+          </Route>
         </Route>
       </Routes>
     </div>
