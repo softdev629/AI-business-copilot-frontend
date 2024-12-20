@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+# 🎵 Music AI Bot 🎶
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Music AI Bot** is an intelligent chatbot that learns from various data sources such as `.txt` files, `.pdf` files, and YouTube video transcripts. Users can engage in meaningful conversations with the bot, powered by the knowledge it acquires from these data sources. The web interface for this application is built using **React** and **Ant Design (AntD)**, ensuring a polished and user-friendly experience.
 
-## Available Scripts
+## ⭐ Features
 
-In the project directory, you can run:
+- Train the bot with `.txt`, `.pdf` files, or **YouTube** video transcripts.
+- Chat with the bot using conversational AI, leveraging the data it has been trained on.
+- Seamless integration of **React**, **AntD**, and **Redux Toolkit** for a smooth and interactive interface.
+- Real-time communication using **WebSocket** for responsive user interactions.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🛠️ Technology Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend**:
+  - React.js
+  - Ant Design (AntD) for UI Components
+  - Redux Toolkit for state management
+  - WebSocket for real-time chat functionality
+- **Backend**:
+  - Chatbot server to handle training and AI conversations
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🚀 Setup and Installation
 
-### `npm run build`
+Follow these steps to get the project up and running locally:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Prerequisites:
+- Ensure you have **Node.js** and **npm** (or **yarn**) installed on your system.
+- Setup the **chatbot server** before running the front-end for a working test.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Steps:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/softdev629/AI-business-copliot-frontend.git
+   cd AI-business-copliot-frontend
+   ```
 
-### `npm run eject`
+2. **Install Dependencies**  
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. **Start the React Application**  
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. **Start the Chatbot Server**  
+   - Make sure the chatbot server is running locally or remotely to enable functional testing.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. **Access the Application**  
+   Open your browser and visit:  
+   ```bash
+   http://localhost:3000
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 📦 Folder Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `src/` - Contains the React code for the front-end UI.
+- `components/` - Reusable React components.
+- `store.js` - Store configuration using Redux Toolkit for state management.
+- `webpack.config.js` - Build configuration for React development and production.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 💻 How It Works
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. **Upload Files or Link Metadata:**  
+   The bot can be trained using local `.txt` or `.pdf` files or by using transcript data from YouTube videos.
 
-### Analyzing the Bundle Size
+2. **Real-Time Chat:**  
+   Engage with the bot in real-time via a clean chat interface. The bot responds intelligently based on the knowledge it attains from the uploaded data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+## ⚡ Integrations
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **YouTube Integration:** Upload YouTube transcripts to teach the bot from video content.
+- **Ant Design (AntD):** Ensures a premium UI experience.
+- **WebSocket Integration:** Provides a real-time experience while chatting with the bot.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📋 Notes
 
-### Deployment
+- **Server Prerequisite:** The chatbot server should be running and correctly configured for the front-end app to function.
+- Ensure the uploaded data is structured correctly and complies with the supported formats (`.txt`, `.pdf`, or YouTube transcripts).
+- Data privacy: All uploaded data remains local to the server unless shared publicly.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 🔧 Future Enhancements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Add support for additional file formats (e.g., `.docx`).
+- Enhance the chatbot to support multiple languages.
+- Implement a cloud-based solution for storing training data.
+- Optimize the training model for faster learning.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! If you'd like to contribute, please fork the repository and create a pull request with your updates. Make sure your code follows the project's standards.
+
+1. Fork it.
+2. Create your feature branch: `git checkout -b feature/AmazingFeature`.
+3. Commit your changes: `git commit -m 'Add some AmazingFeature'`.
+4. Push to the branch: `git push origin feature/AmazingFeature`.
+5. Open a pull request.
+
+---
+
+## 🧑‍💻 Contributors
+
+- [Bohdan](https://github.com/softdev629) (Project Creator)
+
+---
+
+## 📄 License
+
+This project is **MIT Licensed**. See the `LICENSE` file for more details.
+
+---
+
+## 📞 Contact
+
+For questions, bugs, or feature requests, feel free to create an issue or reach out to me:
+
+- GitHub: [My Profile](https://github.com/softdev629)
+- Email: drozd.dev@outlook.com
